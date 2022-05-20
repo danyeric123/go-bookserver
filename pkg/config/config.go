@@ -2,13 +2,13 @@ package config
 
 import(
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 var db *gorm.DB
 
 func Connect(){
-	d, err := gorm.Open("mysql", "akhil:Axlesharma@12@/simplerest?charset=utf8&parseTime=True&loc=Local")
+	d, err := gorm.Open("postgres", "host=localhost port=5432 user=davidnagar dbname=postgres sslmode=disable password=postgres")
 	if err != nil{
 		panic(err)
 	}

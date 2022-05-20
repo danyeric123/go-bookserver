@@ -18,7 +18,6 @@ func retrieveBookId(r *http.Request) int64{
 	idNum, err := strconv.ParseInt(bookId, 0, 0) 
 	if err != nil {
 		fmt.Println(err)
-		return -1
 	}
 	return idNum
 }
