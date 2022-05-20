@@ -22,6 +22,10 @@ func retrieveBookId(r *http.Request) int64{
 	return idNum
 }
 
+func Index(w http.ResponseWriter, r *http.Request){
+	w.Write([]byte("Welcome to Go-Bookserver"))
+}
+
 func GetAllBooks(w http.ResponseWriter, r *http.Request){
 	books := models.GetAllBooks()
 	res, _ := json.Marshal(books)

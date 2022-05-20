@@ -7,7 +7,7 @@ import (
 )
 
 func SendJsonResponse(w http.ResponseWriter, res []byte){
-	w.Header().Set("Content-Type","pkglication/json")
+	w.Header().Set("Content-Type","application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
