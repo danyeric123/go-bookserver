@@ -1,0 +1,36 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: DockerFile
+    networks:
+      - go-book-net
+    command: /bin/sh -c "go run main.go"
+    stdin_open: true
+    tty: true
+    ports:
+      - 8080:8080
+    depends_on:
+      - "db"
+    volumes:
+      - .:/app:delegated,rw
+  db:
+    image: postgres:12.8-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=pg
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=crud
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data 
+    networks:
+      - go-book-net
+
+volumes:
+  db:
+
+networks:
+  go-book-net:
