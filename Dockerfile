@@ -2,7 +2,7 @@
 ## Build
 ##
 
-FROM golang:1.16-buster AS build
+FROM golang:alpine AS build
 
 WORKDIR /app
 
@@ -10,8 +10,7 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 
-COPY main.go ./
-COPY ./pkg ./
+COPY . .
 
 RUN go build -o /go-bookserver
 
@@ -19,7 +18,7 @@ RUN go build -o /go-bookserver
 ## Deploy
 ##
 
-FROM gcr.io/distroless/base-debian10
+FROM alpine
 
 WORKDIR /
 
@@ -27,6 +26,8 @@ COPY --from=build /go-bookserver /go-bookserver
 
 EXPOSE 8080
 
-USER nonroot:nonroot
+# Add user that will be used in the container.
+RUN adduser --disabled-password davidnagar
+USER davidnagar
 
 ENTRYPOINT ["/go-bookserver"]
