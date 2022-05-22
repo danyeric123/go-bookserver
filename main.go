@@ -1,13 +1,13 @@
 package main
 
 import (
-	"log"
-	"os"
-	"net/http"
 	"github.com/danyeric123/go-bookserver/pkg/routes"
-	"github.com/gorilla/mux"
 	"github.com/gorilla/handlers"
+	"github.com/gorilla/mux"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"log"
+	"net/http"
+	"os"
 )
 
 func main() {
