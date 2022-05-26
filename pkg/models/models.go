@@ -2,16 +2,25 @@ package models
 
 import (
 	"github.com/danyeric123/go-bookserver/pkg/config"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 var db *gorm.DB
 
 type Book struct {
 	gorm.Model
-	Name        string `gorm:""json:"name"`
-	Author      string `json:"author"`
-	Publication string `json:"publication"`
+	Title           string `gorm:""json:"title"`
+	Author          uint
+	Publisher       string `json:"publisher"`
+	PublicationYear int64  `json:"publicationYear"`
+}
+
+type Author struct {
+	gorm.Model
+	FirstName string `json:"firstName`
+	LastName  string `json:"lastName`
+	DOB       string `json:"dob`
+	Books     []Book `gorm:"foreignkey:BookID"`
 }
 
 func init() {
@@ -21,7 +30,7 @@ func init() {
 }
 
 func (b *Book) CreateBook() *Book {
-	db.NewRecord(b)
+	// db.NewRecord(b)
 	db.Create(&b)
 	return b
 }

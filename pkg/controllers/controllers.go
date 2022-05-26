@@ -59,14 +59,14 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	utils.ParseBody(r, updateBook)
 	bookId := retrieveBookId(r)
 	bookDetails, db := models.GetBook(bookId)
-	if updateBook.Name != "" {
-		bookDetails.Name = updateBook.Name
+	if updateBook.Title != "" {
+		bookDetails.Title = updateBook.Title
 	}
-	if updateBook.Author != "" {
+	if updateBook.Author != bookDetails.Author {
 		bookDetails.Author = updateBook.Author
 	}
-	if updateBook.Publication != "" {
-		bookDetails.Publication = updateBook.Publication
+	if updateBook.Publisher != "" {
+		bookDetails.Publisher = updateBook.Publisher
 	}
 	db.Save(&bookDetails)
 	res, _ := json.Marshal(bookDetails)
